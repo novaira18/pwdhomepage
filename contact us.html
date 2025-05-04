@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Fusion Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        nav {
+            background-color: rgb(1, 8, 46);
+            padding: 1rem;
+            color: white;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 0 2rem;
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .features li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
+
+        .calendar-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .calendar-day {
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .calendar-day:hover {
+            background-color: #f0f0f0;
+        }
+
+        .calendar-day.selected {
+            background-color: rgb(1, 8, 46);
+            color: white;
+        }
+
+        .timezone {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .contact-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 0 2rem;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+         /* Footer */
+        footer {
+            background: rgb(1, 4, 86);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        input, textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: rgb(1, 8, 46);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            margin-right: 1rem;
+            color: rgb(1, 8, 46);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container,
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">FUSION HUB</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="">Features</a>
+                <a href="about.html">About</a>
+                <a href="contact us.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h1>Talk to our team</h1>
+                <p>We'll answer any questions you have about our dashboards and help you find the perfect solution for your needs.</p>
+                
+                <ul class="features">
+                    <li>See our dashboards demonstrations in action</li>
+                    <li>Learn about our latest updates in system</li>
+                    <li>Get expert advice on our services</li>
+                    <li>Discuss your specific requirements with our team</li>
+                </ul>
+            </div>
+
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h3>Select a Day</h3>
+                    <div class="calendar-nav">
+                        <button id="prevMonth">&lt;</button>
+                        <span id="currentMonth">September 2024</span>
+                        <button id="nextMonth">&gt;</button>
+                    </div>
+                </div>
+                <div class="calendar" id="calendar"></div>
+                <div class="timezone">
+                    <p>Time zone</p>
+                    <select id="timezone-select">
+                        <option value="UTC">UTC Time (00:00)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="get-in-touch">
+                <h2>Get in touch with us.</h2>
+                <p>We're excited to connect with you! Fill in our contact form and we'll get back to you shortly.</p>
+                
+                <div class="contact-details">
+                    <div class="detail">
+                        <img src="location.svg" height="20" width="20" alt="Location:">
+                        <span>Air University, E-9, Islamabad, Pakistan.</span>
+                    </div>
+                    <div class="detail">
+                        <img src="email.svg" height="20" width="20" alt="Email">
+                        <span>contact@fusionhub.com</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <input type="text" placeholder="Name*" required>
+                    <input type="email" placeholder="Email*" required>
+                    <input type="tel" placeholder="Phone">
+                    <input type="text" placeholder="Company">
+                    <textarea placeholder="Message*" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FUSION HUB. All rights reserved. | <a href="terms.html">Terms & Conditions</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendar = document.getElementById('calendar');
+            const currentMonthElement = document.getElementById('currentMonth');
+            const prevMonthButton = document.getElementById('prevMonth');
+            const nextMonthButton = document.getElementById('nextMonth');
+            
+            let currentDate = new Date();
+            let selectedDate = null;
+
+            function renderCalendar() {
+                calendar.innerHTML = '';
+                
+                const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+                
+                currentMonthElement.textContent = currentDate.toLocaleString('default', { 
+                    month: 'long', 
+                    year: 'numeric' 
+                });
+
+                // Add day headers
+                const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                days.forEach(day => {
+                    const dayElement = document.createElement('div');
+                    dayElement.textContent = day;
+                    calendar.appendChild(dayElement);
+                });
+
+                // Add empty spaces for previous month days
+                for (let i = 0; i < firstDay.getDay(); i++) {
+                    const emptyCell = document.createElement('div');
+                    calendar.appendChild(emptyCell);
+                }
+
+                // Add current month days
+                for (let i = 1; i <= lastDay.getDate(); i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.textContent = i;
+                    dayElement.classList.add('calendar-day');
+                    dayElement.addEventListener('click', function() {
+                        document.querySelectorAll('.calendar-day').forEach(day => day.classList.remove('selected'));
+                        dayElement.classList.add('selected');
+                        selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+                    });
+                    calendar.appendChild(dayElement);
+                }
+            }
+
+            prevMonthButton.addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
+            });
+
+            nextMonthButton.addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+            });
+
+            renderCalendar();
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for your message!');
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+</body>
+</html>

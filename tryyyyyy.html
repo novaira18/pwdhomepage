@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI with Sliding Effect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            display: flex;
+            gap: 2rem;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            text-align: center;
+            padding: 1rem;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2, .card p, .card a {
+            transition: opacity 0.3s ease;
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            color: #555;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #888;
+            margin: 0.5rem 0;
+        }
+
+        .card a {
+            display: inline-block;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: #555;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .card a:hover {
+            background: #555;
+            color: #fff;
+        }
+
+        .card:hover {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card:hover h2, .card:hover p, .card:hover a {
+            opacity: 0;
+        }
+
+        .card:nth-child(1):hover {
+            background-image: url('1.png');
+        }
+
+        .card:nth-child(2):hover {
+            background-image: url('minicontactbook.png');
+        }
+
+        .card:nth-child(3):hover {
+            background-image: url('miniaccount.png');
+        }
+
+        .card:nth-child(4):hover {
+            background-image: url('minitodolist.png');
+        }
+
+        .card.slide {
+            animation: slideOutToBorder 0.8s forwards;
+        }
+
+        @keyframes slideOutToBorder {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100vw); /* Slides completely off the viewport */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>01</h2>
+            <p>Photo Gallery</p>
+            <p>pictures</p>
+            <a href="gallery.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+        <div class="card">
+            <h2>02</h2>
+            <p>Contact Book</p>
+            <p>numbers</p>
+            <a href="contactbook.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+        <div class="card">
+            <h2>03</h2>
+            <p>Accounts</p>
+            <p>Transactions and billing</p>
+            <a href="accounts.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+        <div class="card">
+            <h2>04</h2>
+            <p>To Do List</p>
+            <p>Manage tasks</p>
+            <a href="todolist.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+    </div>
+
+    <script>
+        function redirectWithSlide(event, element) {
+            event.preventDefault(); // Prevent default link action
+            const link = element.href;
+
+            // Add slide class to the card
+            const card = element.closest('.card');
+            card.classList.add('slide');
+
+            // Redirect after animation completes (0.5s)
+            setTimeout(() => {
+                window.location.href = link;
+            }, 500);
+        }
+    </script>
+</body>
+</html>

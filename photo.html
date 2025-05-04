@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Album Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .album {
+            margin-bottom: 20px;
+        }
+        .album h2 {
+            margin: 10px 0;
+        }
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .image-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-item img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        .input-container input {
+            padding: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo Album Manager</h1>
+
+    <!-- Create Album Section -->
+    <div class="input-container">
+        <input type="text" id="album-name" placeholder="Enter album name">
+        <button id="create-album">Create Album</button>
+    </div>
+
+    <!-- Upload Images Section -->
+    <div class="input-container">
+        <select id="album-select">
+            <option value="">Select Album</option>
+        </select>
+        <input type="file" id="file-upload" multiple accept="image/*">
+        <button id="upload-btn">Upload to Album</button>
+    </div>
+
+    <!-- Albums Section -->
+    <div id="albums"></div>
+
+    <!-- Include AWS SDK -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1317.0.min.js"></script>
+
+    <!-- Script Section -->
+    <script>
+        AWS.config.update({
+            accessKeyId: 'AKIARHQBNKIKQQCWOOAE',
+            secretAccessKey: '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',
+            region: 'us-east-2'
+        });
+
+        const s3 = new AWS.S3();
+        const bucketName = 'au-web-project-photoupload';
+
+        const albumSelect = document.getElementById('album-select');
+        const albumsContainer = document.getElementById('albums');
+        const fileInput = document.getElementById('file-upload');
+        const createAlbumButton = document.getElementById('create-album');
+        const uploadButton = document.getElementById('upload-btn');
+
+        function refreshAlbums() {
+            albumsContainer.innerHTML = '';
+            albumSelect.innerHTML = '<option value="">Select Album</option>';
+
+            s3.listObjectsV2({
+                Bucket: bucketName,
+                Delimiter: '/'
+            }, (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+
+                if (data.CommonPrefixes) {
+                    data.CommonPrefixes.forEach(prefix => {
+                        const albumName = prefix.Prefix.slice(0, -1);
+                        albumSelect.innerHTML += `<option value="${albumName}">${albumName}</option>`;
+
+                        const albumDiv = document.createElement('div');
+                        albumDiv.classList.add('album');
+
+                        const albumHeader = document.createElement('h2');
+                        albumHeader.textContent = albumName;
+
+                        const deleteAlbumButton = document.createElement('button');
+                        deleteAlbumButton.textContent = 'Delete Album';
+                        deleteAlbumButton.onclick = () => deleteAlbum(albumName);
+
+                        const imagesDiv = document.createElement('div');
+                        imagesDiv.classList.add('images');
+
+                        albumDiv.appendChild(albumHeader);
+                        albumDiv.appendChild(deleteAlbumButton);
+                        albumDiv.appendChild(imagesDiv);
+                        albumsContainer.appendChild(albumDiv);
+
+                        listAlbumImages(albumName, imagesDiv);
+                    });
+                }
+            });
+        }
+
+        function createAlbum() {
+            const albumName = document.getElementById('album-name').value.trim();
+            if (!albumName) return alert('Album name is required');
+
+            s3.putObject({
+                Bucket: bucketName,
+                Key: `${albumName}/`
+            }, (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                refreshAlbums();
+            });
+        }
+
+        function listAlbumImages(albumName, imagesDiv) {
+            s3.listObjectsV2({
+                Bucket: bucketName,
+                Prefix: `${albumName}/`
+            }, (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+
+                if (data.Contents) {
+                    data.Contents.forEach(file => {
+                        if (file.Key !== `${albumName}/`) {
+                            const imgUrl = s3.getSignedUrl('getObject', {
+                                Bucket: bucketName,
+                                Key: file.Key,
+                                Expires: 60 * 60
+                            });
+
+                            const imageItem = document.createElement('div');
+                            imageItem.classList.add('image-item');
+
+                            const img = document.createElement('img');
+                            img.src = imgUrl;
+
+                            const deleteButton = document.createElement('button');
+                            deleteButton.textContent = 'Delete';
+                            deleteButton.onclick = () => deleteImage(file.Key, albumName);
+
+                            imageItem.appendChild(img);
+                            imageItem.appendChild(deleteButton);
+                            imagesDiv.appendChild(imageItem);
+                        }
+                    });
+                }
+            });
+        }
+
+        function uploadFiles() {
+            const albumName = albumSelect.value;
+            if (!albumName) return alert('Please select an album to upload to');
+
+            const files = fileInput.files;
+            if (files.length === 0) return alert('Please select files to upload');
+
+            Array.from(files).forEach(file => {
+                const key = `${albumName}/${file.name}`;
+                s3.upload({
+                    Bucket: bucketName,
+                    Key: key,
+                    Body: file,
+                    ACL: 'public-read'
+                }, (err, data) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    refreshAlbums();
+                });
+            });
+        }
+
+        function deleteAlbum(albumName) {
+            s3.listObjectsV2({
+                Bucket: bucketName,
+                Prefix: `${albumName}/`
+            }, (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+
+                const objectsToDelete = data.Contents.map(file => ({ Key: file.Key }));
+
+                s3.deleteObjects({
+                    Bucket: bucketName,
+                    Delete: { Objects: objectsToDelete }
+                }, (err, data) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    refreshAlbums();
+                });
+            });
+        }
+
+        function deleteImage(key, albumName) {
+            s3.deleteObject({
+                Bucket: bucketName,
+                Key: key
+            }, (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                refreshAlbums();
+            });
+        }
+
+        createAlbumButton.addEventListener('click', createAlbum);
+        uploadButton.addEventListener('click', uploadFiles);
+
+        refreshAlbums();
+    </script>
+</body>
+</html>

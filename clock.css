@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f3f4f6; /* Soft pastel gray */
+    color: #333; /* Neutral text color for readability */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header {
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    background-color: #e4e7eb; /* Light pastel */
+    color: #333; /* Neutral text color */
+    font-family: "Hack", sans-serif;
+    font-size: 2rem;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    margin-top: 10rem;
+}
+
+.digital-clock {
+    background-color: #222; /* Dark background for contrast */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1.5rem;
+    user-select: none;
+    padding: 1.5rem 3rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.3); /* Light, soft border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle outer shadow */
+}
+
+
+.week {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    color: #888; /* Soft gray for inactive days */
+    font-weight: bold;
+    font-family: "Hack", sans-serif;
+}
+
+.week .active {
+    color: #ff6f61; /* Subtle neon orange */
+    text-shadow: 0 0 6px #ff6f61;
+}
+
+.time {
+    font-family: "FX-LED", sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.hour,
+.min,
+.dot {
+    display: inline-block;
+    font-size: 12rem;
+    margin: 0 0.1rem;
+    color: white; /* Subtle neon orange */
+    text-shadow: 
+        0 0 6px rgba(255, 111, 97, 0.8), /* Neon glow */
+        0 0 10px rgba(255, 111, 97, 0.5); /* Softer outer glow */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5); /* Light outline */
+    text-shadow: 1px rgba(255, 255, 255, 0.5); /* Light outline for wider browser support */
+}
+
+
+.dot {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}

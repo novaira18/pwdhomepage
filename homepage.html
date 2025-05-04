@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<h lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pwd</title>
+    <link rel="website icon" type="png" href="titleicon.png" >
+    <link rel="stylesheet" href="style.css">
+</head>
+    <header class="banner">
+        <h1 style="color: white;">Welcome to the Fusion Hub</h1>
+        <p>Get and Organize everything in one place!</p>
+        <nav class="navbar">
+            <!-- Login Icon -->
+            <div class="login-icon">
+                <a href="signup.html">
+                    <img src="loginicon.jpg" alt="Login Icon" class="icon-img">
+                </a>
+            </div>
+            <!-- Navigation links in the middle -->
+            <div class="nav-middle">
+                <a href="homepage.html"><b>Home</b></a>
+                <a href="gallery.html"><b>Gallery</b></a>
+                <a href="accounts.html"><b>Accounts</b></a>
+                <a href="features.html"><b>More</b></a>
+            </div>
+            <!-- Dropdown menu on the right -->
+            <button class="menu" onclick="toggleMenu()">&#9776;</button>
+            <ul class="dropdown" id="dropdownMenu">
+                <li><a href="homepage.html">🏠Home Page</a></li>
+                <li><a href="todolist.html">📋ToDoList</a></li>
+                <li><a href="gallery.html">🖼️Photo Gallery</a></li>
+                <li><a href="accounts.html">🏦Accounts</a></li>
+                <li><a href="contactbook.html">📒Contact Book</a></li>
+                <li><a href="calculator.html">🧮Calculator</a></li>
+                <li><a href="weather.html">🌤️Weather</a></li>
+                <li><a href="clock.html">🕰️Clock</a></li>
+                <li><a href="socialmedia.html">🌐Social Apps</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <img src="homepage poster .png" alt="Homepage Poster">
+    </div>
+    <h1>FEATURES</h1>
+    <br><div class="container">
+        <div class="card">
+            <br><br><br><h2 style="color: burlywood;">01</h2>
+            <p><b>Photo Gallery</b></p>
+            <p>pictures</p>
+            <a href="gallery.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+        <div class="card">
+            <br><br><br><h2 style="color: skyblue;">02</h2>
+            <p><b>Contact Book</b></p>
+            <p>numbers</p>
+            <a href="contactbook.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+        <div class="card">
+            <br><br><br><h2 style="color: grey;">03</h2>
+            <p><b>Accounts</b></p>
+            <p>Transactions and billing</p>
+            <a href="accounts.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+        <div class="card">
+            <br><br><br><h2 style="color: pink;">04</h2>
+            <p><b>To Do List</b></p>
+            <p>Manage tasks</p>
+            <a href="todolist.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+    </div>
+    <br><div class="container">
+        <div class="more">
+            <video autoplay muted loop>
+                <source src="more.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <br><br><br><br><h2 style="color: orchid;">Explore More</h2>
+            <p><b>Discover exciting features</b></p>
+            <a href="features.html" target="_blank" onclick="redirectWithSlide(event, this)">View More</a>
+        </div>
+    </div>
+    <footer class="footer">
+        <a href="about.html">About</a>
+        <a href="contact us.html">Contact</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">feedback</a>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+  

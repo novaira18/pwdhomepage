@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form action="submit_form.php" method="post" enctype="multipart/form-data">
+        <!-- Fieldset to group related inputs -->
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <!-- Label and Input -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+
+            <!-- Textarea -->
+            <label for="bio">Short Bio:</label>
+            <textarea id="bio" name="bio" rows="4" cols="30" placeholder="Tell us about yourself..."></textarea>
+            <br><br>
+
+            <!-- Select with Optgroup -->
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <optgroup label="Asia">
+                    <option value="india">India</option>
+                    <option value="pakistan">Pakistan</option>
+                </optgroup>
+                <optgroup label="Europe">
+                    <option value="germany">Germany</option>
+                    <option value="france">France</option>
+                </optgroup>
+            </select>
+            <br><br>
+
+            <!-- File Input -->
+            <label for="profile-pic">Upload Profile Picture:</label>
+            <input type="file" id="profile-pic" name="profile-pic" accept="image/*">
+            <br><br>
+
+            <!-- Datalist -->
+            <label for="skills">Skill Set:</label>
+            <input list="skills" id="skill-input" name="skill">
+            <datalist id="skills">
+                <option value="Web Development">
+                <option value="Graphic Design">
+                <option value="Data Analysis">
+                <option value="AI & ML">
+            </datalist>
+            <br><br>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+</body>
+</html>

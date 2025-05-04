@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://127.0.0.1:5500/exam.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./NW cafe_files/boxicons.min.css">
+    <title>NW cafe</title>
+    <style>
+        body{
+            background-color: peachpuff;
+            padding: 0;
+            margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+.home{
+    background: brown;
+    color: white;
+    box-shadow: #333;
+align-items: center;
+text-align: center;
+margin: 0;
+padding: 0;
+
+}
+button{
+    cursor:pointer;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    display: flex;
+    
+}
+.logo i{
+    color: black;
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    
+}
+.logo i:hover{
+transform: scale(1.1);
+color:white;
+}
+.options {
+    color: black;
+    cursor:pointer;
+    text-decoration: none;
+    align-items: center;
+    text-align: center; 
+    justify-content: space-between;  
+    transition: transform 0.3s ease;
+}
+.option li:hover{
+    color: white;
+    transform: scale(1.1);
+}
+.dropdown {
+    color: black;
+}
+.dropdown i{
+    background-color: transparent;
+    border-color: none;
+    cursor:pointer;
+
+}
+.list{
+    list-style: none;
+    text-decoration: none;
+    color:black;
+    border-radius: 10px;
+    display: none;
+    
+    
+}
+.list li:hover{
+border-color: lightslategray;
+transform: scale(1.1);
+}
+footer{
+    background-color: brown;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0;
+    color: aliceblue;
+}
+footer i{
+    color: azure;
+    transition: transform 0.3s ease;
+}
+footer i:hover{
+    transform: scale(1.1);
+}
+
+    </style>
+</head>
+<body>
+   <header class="home">
+    <h1>welcome to our NW cafe</h1>
+    <p>enjoy everything of delicious taste</p>
+    <nav>
+        <div class="logo">
+            <a href="http://127.0.0.1:5500/loginpage.html"><i class="bx bxs-user"></i></a>
+        </div>
+        <div class="options">
+            <a href="http://127.0.0.1:5500/exam.html#home"><i class="bx bxs-home"></i>Home</a>
+            <a href="http://127.0.0.1:5500/exam.html#menu"><i class="bx bxs-food-menu"></i>Menu</a>
+            <a href="http://127.0.0.1:5500/exam.html#cart"><i class="bx bx-cart"></i>cart</a>
+            <a href="http://127.0.0.1:5500/exam.html#contact"><i class="bx bxs-phone"></i>contact</a>
+        </div>
+        <button class="dropdowm" onclick="togglemenu()"><i class="bx bx-menu"></i></button>
+            <ul class="list" id="dropdowm">
+                <li><a href="http://127.0.0.1:5500/exam.html#home"><i class="bx bxs-home"></i>Home</a></li>
+                <li><a href="http://127.0.0.1:5500/exam.html#menu"><i class="bx bxs-food-menu"></i>menu</a></li>
+                <li><a href="http://127.0.0.1:5500/exam.html#cart"><i class="bx bx-cart"></i>cart</a></li>
+                <li><a href="http://127.0.0.1:5500/exam.html#contact"><i class="bx bxs-phone"></i>contact</a></li>
+                <li><a href="http://127.0.0.1:5500/exam.html#about"><i class="bx bxs-book-open"></i>about</a></li>
+            </ul>
+        
+    </nav>
+   </header> 
+   <footer>
+    <div>
+        <p>©2025 NW Cafe.All rights reserved | contact us:12345678901</p>
+        <a href="https://www.instagram.com/"><i class="bx bxl-instagram-alt"></i></a>
+        <a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a>
+    </div>
+   </footer>
+   <script>
+    function togglemenu(){
+        const menu=document.getElementById('dropdowm');
+        menu.style.display=menu.style.display=='block'? 'none' : 'block';
+    }
+   </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>

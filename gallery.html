@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest-Style Gallery</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <div class="content">
+        <img src="gallery.png" alt="Placeholder Image">
+    </div>
+    <div class="gallery-container">
+        <header>
+            <input type="text" id="search-bar" placeholder="Search for images...">
+        </header>
+
+        <div class="gallery" id="gallery">
+            <!-- Images will be loaded dynamically here -->
+        </div>
+
+        <button id="load-more" class="load-more">Load More</button>
+    </div>
+
+    <!-- Full-screen Image Modal -->
+    <div id="modal" class="modal">
+        <span class="close-btn" id="close-btn">&times;</span>
+        <img id="modal-img" class="modal-content" src="" alt="">
+        <div class="modal-caption">
+            <button id="like-btn">Like</button>
+            <button id="share-btn">Share</button>
+        </div>
+    </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
